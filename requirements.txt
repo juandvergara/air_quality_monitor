@@ -1,2 +1,4 @@
 requests
 python-dotenv
+dataclasses-json
+typing-extensions
