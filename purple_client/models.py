@@ -14,10 +14,10 @@ class SensorData:
     pm2_5: Optional[float]
     confidence: Optional[int]
     last_seen: Optional[int]
+    aqi: int = None
 
-    @property
-    def aqi(self) -> Optional[int]:
-        return self._AQI_from_pm2_5(self.pm2_5)
+    def __post_init__(self):
+        self.aqi = self._AQI_from_pm2_5(self.pm2_5)
 
     def _AQI_from_pm2_5(self, pm2_5: float) -> int:
         """
