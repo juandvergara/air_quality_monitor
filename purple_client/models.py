@@ -23,6 +23,8 @@ class SensorData:
         """
         Determina el AQI basado en los rangos de PM2.5.
         """
+        if pm2_5 is None:
+            return -1
         if pm2_5 > 350.5:
             return self._calculate_AQI(pm2_5, 500, 401, 500.4, 350.5)  # Hazardous
         elif pm2_5 > 250.5:
@@ -45,3 +47,18 @@ class SensorData:
         b = BPh - BPl
         c = Cp - BPl
         return round((a / b) * c + Il)
+    
+    def to_dict(self):
+        return {
+            "sensor_id": self.sensor_id,
+            "name": self.name,
+            "latitude": self.latitude,
+            "longitude": self.longitude,
+            "temperature": self.temperature,
+            "humidity": self.humidity,
+            "preassure": self.preassure,
+            "pm2_5": self.pm2_5,
+            "confidence": self.confidence,
+            "last_seen": self.last_seen,
+            "aqi": self.aqi
+        }
