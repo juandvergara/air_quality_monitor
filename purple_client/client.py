@@ -70,9 +70,10 @@ class PurpleAirClient:
             "selng": bounds["selng"],
             "selat": bounds["selat"]
         }
-        fields = params["fields"].split(',')
+        
         response = requests.get(url, headers=self.headers, params=params)
         data = response.json().get("data", [])
+        fields = response.json().get("fields", [])
 
         self._handle_response(response)
 
