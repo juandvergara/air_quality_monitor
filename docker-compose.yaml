@@ -1,0 +1,5 @@
+services:
+  purpleair-client:
+    build: .
+    environment:
+      - PURPLEAIR_API_KEY=${PURPLEAIR_API_KEY}
