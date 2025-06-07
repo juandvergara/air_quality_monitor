@@ -8,8 +8,8 @@ class SensorData:
     name: str
     latitude: float
     longitude: float
-    temperature: Optional[float]
-    humidity: Optional[float]
+    temperature: Optional[int]
+    humidity: Optional[int]
     preassure: Optional[float]
     pm2_5: Optional[float]
     confidence: Optional[int]

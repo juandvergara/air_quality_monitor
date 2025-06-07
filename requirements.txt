@@ -2,3 +2,4 @@ requests
 python-dotenv
 dataclasses-json
 typing-extensions
+google-cloud-bigquery>=3.0.0
