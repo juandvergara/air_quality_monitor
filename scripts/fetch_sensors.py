@@ -23,4 +23,5 @@ for i, sensor in enumerate(data):
     print(f"  PM2.5: {sensor.pm2_5}")
     print(f"  Confidence: {sensor.confidence}")
     print(f"  Last Seen: {sensor.last_seen}")
+    print(f"  AQI: {sensor.aqi}")
     print()
