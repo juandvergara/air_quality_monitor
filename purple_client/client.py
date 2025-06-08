@@ -89,3 +89,39 @@ class PurpleAirClient:
             confidence=sensor[fields.index("confidence")],
             last_seen=sensor[fields.index("last_seen")]
         ) for sensor in data]
+
+    def get_sensor_history(self, sensor_id: int, start_timestamp: int, end_timestamp: int, average: int = 60):
+        """
+        Obtiene el histórico de un sensor específico.
+
+        Args:
+            sensor_id (int): ID del sensor.
+            start_timestamp (int): Timestamp inicial (epoch seconds).
+            end_timestamp (int): Timestamp final (epoch seconds).
+            average (int): Intervalo de agregación en minutos (default 60 min).
+
+        Returns:
+            List[dict]: Lista de registros históricos con timestamp y valores medidos.
+        """
+        url = f"{self.BASE_URL}/sensors/{sensor_id}/history"
+        params = {
+            "start_timestamp": start_timestamp,
+            "end_timestamp": end_timestamp,
+            "average": average,
+            "fields": "temperature,humidity,pm2.5_atm"
+
+        }
+
+        response = requests.get(url, headers=self.headers, params=params)
+        self._handle_response(response)
+
+        data = response.json()
+        fields = data.get("fields", [])
+        rows = data.get("data", [])
+
+        history = []
+        for row in rows:
+            row_dict = {field: value for field, value in zip(fields, row)}
+            history.append(row_dict)
+
+        return history
