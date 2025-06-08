@@ -24,6 +24,8 @@ El objetivo es crear un sistema automatizado para consultar datos de calidad del
 git clone https://github.com/juandvergara/air_quality_monitor.git
 cd air_quality_monitor
 
+```bash
+
 ---
 
 ###  2️⃣ Variables de entorno
