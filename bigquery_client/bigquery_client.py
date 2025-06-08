@@ -3,6 +3,9 @@ from typing import List
 from purple_client.models import SensorData  # Importa tu dataclass SensorData
 import os
 from datetime import datetime
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Parámetros de configuración
 PROJECT_ID = os.getenv("GCP_PROJECT_ID")
@@ -15,6 +18,7 @@ def upload_sensor_data(sensor_data_list: List[SensorData]):
     """Sube una lista de SensorData a BigQuery."""
     
     table_id = f"{PROJECT_ID}.{DATASET_ID}.{TABLE_ID}"
+    print(f"Subiendo datos a BigQuery: {table_id}")
     table = client.get_table(table_id)
 
     rows_to_insert = []
@@ -22,13 +26,13 @@ def upload_sensor_data(sensor_data_list: List[SensorData]):
         row = {
             "sensor_id": sensor.sensor_id,
             "name": sensor.name,
-            "latitude": sensor.latitude,
-            "longitude": sensor.longitude,
+            "latitude": sensor.latitude if sensor.latitude is not None else 0.0,
+            "longitude": sensor.longitude if sensor.longitude is not None else 0.0,
             "temperature": sensor.temperature,
             "humidity": sensor.humidity,
             "pm2_5": sensor.pm2_5,
             "aqi": sensor.aqi,
-            "timestamp": datetime.utcfromtimestamp(sensor.last_seen).isoformat() + "Z"  # Convertir string ISO a datetime
+            "timestamp": datetime.utcfromtimestamp(sensor.last_seen).isoformat() + "Z"
         }
         rows_to_insert.append(row)
 
