@@ -55,9 +55,8 @@ Obtiene datos de uno o varios sensores de PurpleAir.
 
 ```bash
 
-python3 cli.py fetch --sensor_id 12345
-# o
-python3 cli.py fetch --bounds '{"nw_lat":4.8,"nw_lng":-74.2,"se_lat":4.5,"se_lng":-74.0}'
+python3 -m purple_client.cli fetch --nwlng -74.15 --nwlat 4.85 --selng -74.0 --selat 4.6 --output test_output.json
+
 ```
 
 upload
@@ -65,7 +64,8 @@ Sube datos previamente obtenidos a BigQuery.
 
 ```bash
 
-python3 cli.py upload --input_file data/sensor_data.json
+python3 -m purple_client.cli upload --input test_output.json
+
 ```
 
 export
@@ -73,5 +73,6 @@ Exporta datos desde BigQuery a CSV.
 
 ```bash
 
-python3 cli.py export --output_file export.csv --pm25_threshold 35
+python -m purple_client.cli export --input test_output.json --output filtered.csv --start_date "2025-06-06" --end_date "2025-06-08" --pm2_5_threshold 10
+
 ```
