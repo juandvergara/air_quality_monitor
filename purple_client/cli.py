@@ -87,10 +87,10 @@ def main():
 
     # Fetch command
     fetch_parser = subparsers.add_parser("fetch", help="Fetch data from PurpleAir API")
-    fetch_parser.add_argument("--nwlng", type=float, required=True)
-    fetch_parser.add_argument("--nwlat", type=float, required=True)
-    fetch_parser.add_argument("--selng", type=float, required=True)
-    fetch_parser.add_argument("--selat", type=float, required=True)
+    fetch_parser.add_argument("--nwlng", type=float, required=True, help="Northwest longitude of the bounding box")
+    fetch_parser.add_argument("--nwlat", type=float, required=True, help="Northwest latitude of the bounding box")
+    fetch_parser.add_argument("--selng", type=float, required=True, help="Southeast longitude of the bounding box")
+    fetch_parser.add_argument("--selat", type=float, required=True, help="Southeast latitude of the bounding box")
     fetch_parser.add_argument("--output", type=str, default="output.json", help="Output file path")
 
     # Upload command
